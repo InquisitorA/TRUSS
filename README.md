@@ -1,14 +1,4 @@
 # Compute_Truss
 Compute truss of a graph by distributing it among different processors and running them in parallel
 
-CC=mpic++ 
-CFLAGS=-std=c++11 -lmpi
-
-a2: final.cpp
-	$(CC) $(CFLAGS) final.cpp -o a2
-
-run: final.cpp
-	mpirun -np 8 ./a2 --taskid=1 --inputpath=test2_1/test-input-2.gra --headerpath=test2_1/test-header-2.dat --outputpath=output-2.txt --verbose=1 --startk=1 --endk=8 --p=4
-
-clean:
-	rm -rf *.o a2
+OpenMPI facilitates communication between processors. Massive graphs are taken as input and read in chunks separately by different processes, first support is calculated for each edge and the graph is filtered and truss is computed. Additionaly OpenMP is used to speed up computations within a single processor by running several threads in parallel.
